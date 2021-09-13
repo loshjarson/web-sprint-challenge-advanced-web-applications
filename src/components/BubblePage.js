@@ -35,6 +35,21 @@ const BubblePage = () => {
   };
 
   const deleteColor = (colorToDelete) => {
+    let newArray = [...colors]
+    axiosWithAuth().delete(`http://localhost:5000/api/colors/${colorToDelete.id}`)
+      .then(res => {
+        console.log(res.data)
+        colors.map((color, index) => {
+          console.log(color, index)
+          if (color.id == res.data) {
+            newArray.splice(index,1)
+            setColors(newArray)
+          }
+        })
+      })
+      .catch(e => {             
+          console.log(e)
+      })
   };
 
   return (
