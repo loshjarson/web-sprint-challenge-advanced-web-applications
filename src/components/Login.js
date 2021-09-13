@@ -1,20 +1,65 @@
-import React from "react";
+import React, {useState} from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import * as yup from 'yup';
+import { useHistory } from "react-router";
 
 const Login = () => {
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  })
+  const [error, setError] = useState("")
+  const {push} = useHistory();
 
-  const error = "";
-  //replace with error state
+
+  const handleChange = e => {
+      const {name, value} = e.target
+      setFormData({...formData, [name]: value})
+  }
+
+  const handleSubmit = e => {
+      e.preventDefault()
+      if(formData.username === "" || formData.password === "") {
+        setError("Username or Password not valid.")
+      } else {
+        login()
+      }
+  }
+
+  const login = () => {
+    setError("")
+    axios.post('http://localhost:5000/api/login', formData)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+        
+        push('/bubbles');
+        
+      })
+      .catch(e => {             
+          setError(e.response.data.error)
+      })
+  }
 
   return (
     <div>
-      <h1>Welcome to the Bubble App!</h1>
-      <div data-testid="loginForm" className="login-form">
-        <h2>Build login form here</h2>
-      </div>
-
-      <p id="error" className="error">{error}</p>
+        <h1>Welcome to the Bubbles App</h1>
+        <div data-testid="loginForm" className="login-form">
+          <form onSubmit={handleSubmit}>
+              <div className="input-container">
+                <label htmlFor="username">
+                  Username:
+                  <input type="text" name="username" id="username" placeholder="Username" value={formData.username} onChange={handleChange}/>
+                </label>
+                <label htmlFor="password">
+                  Password:
+                  <input type="password" name="password" id="password" placeholder="Password" value={formData.password} onChange={handleChange}/>
+                </label>
+              </div>
+              <button type="submit" id="submit">Login</button>
+              <p id="error" className="error">{error}</p>
+          </form>
+        </div>
     </div>
   );
 };

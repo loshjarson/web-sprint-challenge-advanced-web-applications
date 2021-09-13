@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Color = (props) => {
-    const {color, setEditColor, toggleEdit, deleteColor} = props;
+    const {color, setEditColor, toggleEdit, deleteColor, setColorId} = props;
 
     const handleDelete = (e) => {
         e.stopPropagation();
@@ -12,6 +12,7 @@ const Color = (props) => {
     const handleEdit = (e) => {
         setEditColor(color);
         toggleEdit(true);
+        setColorId(color.id);
     }
 
     return(<li data-testid="color" id="color" onClick={handleEdit}>
