@@ -36,7 +36,7 @@ test("Renders without errors", ()=> {
 });
 
 test("Renders appropriate number of colors passed in through mock", async ()=> {
-    fetchColorService.mockResolvedValue(testColors);
+    act(() => {fetchColorService.mockResolvedValue(testColors);})
     const {getAllByTestId} = render(<BubblePage/>)
 
     await waitFor(()=> {expect(fetchColorService).toHaveBeenCalled()});
