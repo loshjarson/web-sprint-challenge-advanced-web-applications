@@ -16,12 +16,10 @@ const Login = () => {
   const handleChange = e => {
       const {name, value} = e.target
       setFormData({...formData, [name]: value})
-      console.log(formData)
   }
 
   const handleSubmit = e => {
       e.preventDefault()
-      console.log(formData)
       if(formData.username === "" || formData.password === "") {
         setError("Username or Password not valid.")
       } else {
@@ -33,7 +31,6 @@ const Login = () => {
     setError("")
     axios.post('http://localhost:5000/api/login', formData)
       .then(res => {
-        console.log(res.data.payload)
         localStorage.setItem('token', res.data.payload);
         
         push('/bubbles');

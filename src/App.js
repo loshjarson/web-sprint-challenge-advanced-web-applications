@@ -13,7 +13,6 @@ function App() {
   const logout = () => {
     axiosWithAuth().post('http://localhost:5000/api/logout')
       .then(res => {
-        console.log(res)
         localStorage.removeItem('token');
         window.location.href = "/";
       })

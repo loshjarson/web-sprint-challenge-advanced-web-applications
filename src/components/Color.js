@@ -11,8 +11,8 @@ const Color = (props) => {
 
     const handleEdit = (e) => {
         setEditColor(color);
-        setColorId(color.id)
         toggleEdit(true);
+        setColorId(color.id);
     }
 
     return(<li data-testid="color" id="color" onClick={handleEdit}>

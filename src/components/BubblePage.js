@@ -21,7 +21,6 @@ const BubblePage = () => {
     let newArray = [...colors]
     axiosWithAuth().put(`http://localhost:5000/api/colors/${id}`, editColor)
       .then(res => {
-        console.log(res.data)
         colors.map((color, index) => {
           if (color.id === res.data.id) {
             newArray[index] = res.data
@@ -51,7 +50,7 @@ const BubblePage = () => {
           console.log(e)
       })
   };
-
+  
   return (
     <div className="container">
       <ColorList colors={colors} editing={editing} toggleEdit={toggleEdit} saveEdit={saveEdit} deleteColor={deleteColor}/>
