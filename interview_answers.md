@@ -2,6 +2,10 @@
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. These will not be counted as a part of your sprint score but will be helpful for preparing you for your endorsement interview, and enhancing overall understanding.
 
 
+
+<!-- the codegrade tests pass when "npm run test codegrade.test" is run, but they are not passed in the codegrade client on canvas -->
+
+
 1. Explain what a token is used for.
 
 tokens are used to allow the server to identify different users and to verify that a user is logged in

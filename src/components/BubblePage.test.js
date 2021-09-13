@@ -4,6 +4,7 @@ import fetchColorService from '../services/fetchColorService';
 import { render, screen} from "@testing-library/react";
 import BubblePage from './BubblePage';
 import { waitFor } from '@testing-library/dom';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('../services/fetchColorService')
 
@@ -37,7 +38,7 @@ test("Renders without errors", ()=> {
 
 test("Renders appropriate number of colors passed in through mock", async ()=> {
     fetchColorService.mockResolvedValue(testColors);
-    const {getAllByTestId} = render(<BubblePage/>)
+    act(() => render(<BubblePage/>))
 
     await waitFor(()=> {expect(fetchColorService).toHaveBeenCalled()});
     await waitFor(() => {
